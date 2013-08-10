@@ -38,6 +38,9 @@ public class CRCommand implements CommandExecutor{
 				if(command.equalsIgnoreCase("help")){
 					
 					p.sendMessage(CR.getPrefix() + "/cr help - Displays help menu");
+					p.sendMessage(CR.getPrefix() + "/cr create - Creates regenerating chest");
+					p.sendMessage(CR.getPrefix() + "/cr remove - Removes regenerating chest");
+					p.sendMessage(CR.getPrefix() + "/cr reload - Reloads config file");
 					
 				}else if(command.equalsIgnoreCase("create")){
 					
@@ -105,6 +108,44 @@ public class CRCommand implements CommandExecutor{
 							
 						}
 						
+					}else{
+						p.sendMessage(CR.getPrefix() + ChatColor.DARK_RED + "No permission!");
+					}
+					
+				}else if(command.equalsIgnoreCase("remove")){
+					
+					if(p.hasPermission("chestregen.remove")){
+						
+						if(!(args.length > 1)){
+							p.sendMessage(CR.getPrefix() + ChatColor.DARK_RED + "Error! /cr remove <name>");
+						}else{
+							
+							String cName = args[1];
+							
+							File file = new File(CR.c.getDataFolder(), File.separator + "chests" + File.separator + cName + ".yml");
+							
+							if(file.exists()){
+								file.delete();
+							}else{
+								p.sendMessage(CR.getPrefix() + ChatColor.DARK_RED + "Error! That chest does not exist!");
+							}
+							
+						}
+						
+					}else{
+						p.sendMessage(CR.getPrefix() + ChatColor.DARK_RED + "No permission!");
+					}
+					
+				}else if(command.equalsIgnoreCase("reload")){
+					
+					if(p.hasPermission("chestregen.reload")){
+						
+						CR.c.reloadConfig();
+						
+						p.sendMessage(CR.getPrefix() + "Reloaded Config file!");
+						
+					}else{
+						p.sendMessage(CR.getPrefix() + ChatColor.DARK_RED + "No permission!");
 					}
 					
 				}

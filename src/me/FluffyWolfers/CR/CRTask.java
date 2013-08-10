@@ -28,7 +28,7 @@ public class CRTask extends BukkitRunnable{
 				int time = yaml.getInt("time");
 				long timeLong = yaml.getLong("time-long");
 				
-				if(System.currentTimeMillis() < timeLong){
+				if(System.currentTimeMillis() >= timeLong){
 					
 					int ammount = yaml.getInt("inv.amm");
 					String worldStr = yaml.getString("coords.world");
@@ -59,10 +59,14 @@ public class CRTask extends BukkitRunnable{
 							
 						}
 						
+						long newTime = System.currentTimeMillis() + (time * 1000);
+						yaml.set("time-long", newTime);
+						
+						try{
+							yaml.save(child);
+						}catch(Exception e){e.printStackTrace();}
+						
 					}
-					
-					long newTime = System.currentTimeMillis() + (time * 1000);
-					yaml.set("time-long", newTime);
 					
 				}
 				

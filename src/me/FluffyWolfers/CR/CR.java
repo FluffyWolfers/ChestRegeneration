@@ -26,7 +26,7 @@ public class CR extends JavaPlugin{
 		
 		this.loadConfigs();
 		
-		new CRTask().runTaskTimer(this, 100, 50);
+		new CRTask().runTaskTimer(this, 0, 20);
 		
 	}
 	

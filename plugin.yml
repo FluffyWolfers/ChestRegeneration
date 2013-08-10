@@ -12,5 +12,7 @@ permissions:
     default: op
   chestregen.create:
     default: op
-  chestregen.use:
-    default: true
+  chestregen.remove:
+    default: op
+  chestregen.reload:
+    default: op
