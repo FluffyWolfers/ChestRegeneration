@@ -74,6 +74,14 @@ public class CRCommand implements CommandExecutor{
 										
 									}
 									
+									counter--;
+									
+									yaml.set("inv.amm", counter);
+									
+									try{
+										yaml.save(file);
+									}catch(Exception e){e.printStackTrace();}
+									
 									p.sendMessage(CR.getPrefix() + "Success! Chest inventory saved to " + cName + ".yml");
 									
 								}else{
