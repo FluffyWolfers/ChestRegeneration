@@ -1,3 +1,9 @@
 name: ChestRegeneration
 main: me.FluffyWolfers.CR
 version: 1.0
+commands:
+  chestregen:
+    description: Main command for ChestRegeneration plugin
+    permission: chestregen.cr
+    permission-message: No no no!
+    aliases: [chest, regen, chestregeneration, regeneration, cr]
