@@ -7,3 +7,10 @@ commands:
     permission: chestregen.cr
     permission-message: No no no!
     aliases: [chest, regen, chestregeneration, regeneration, cr]
+permissions:
+  chestregen.cr:
+    default: op
+  chestregen.create:
+    default: op
+  chestregen.use:
+    default: true

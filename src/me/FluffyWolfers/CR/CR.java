@@ -24,9 +24,17 @@ public class CR extends JavaPlugin{
 		this.getCommand("regeneration").setExecutor(new CRCommand());
 		this.getCommand("chestregeneration").setExecutor(new CRCommand());
 		
+		this.loadConfigs();
+		
 	}
 	
-	public static String getPreifx(){
+	public void loadConfigs(){
+		
+		this.saveDefaultConfig();
+		
+	}
+	
+	public static String getPrefix(){
 		return ChatColor.AQUA + "[" + ChatColor.DARK_AQUA + "ChestRegeneration" + ChatColor.AQUA + "] " + ChatColor.LIGHT_PURPLE;
 	}
 	
