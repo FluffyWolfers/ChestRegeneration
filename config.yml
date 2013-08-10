@@ -1,2 +1,4 @@
 # Made by FluffyWolfers
 
+# If this is true, then the chest will be cleared out before restocking it.
+clear-chest: true

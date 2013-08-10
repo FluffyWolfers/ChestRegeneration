@@ -3,6 +3,7 @@ package me.FluffyWolfers.CR;
 import java.io.File;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -42,11 +43,13 @@ public class CRCommand implements CommandExecutor{
 					
 					if(p.hasPermission("chestregen.create")){
 						
-						if(!(args.length > 1)){
+						if(!(args.length > 2)){
 							p.sendMessage(CR.getPrefix() + ChatColor.DARK_RED + "Error! /cr create <name> <regentime>");
 						}else{
 							
 							String cName = args[1];
+							String ti = args[2];
+							int time = Integer.parseInt(ti);
 							
 							if(p.getTargetBlock(null, 10) != null){
 								
@@ -54,7 +57,7 @@ public class CRCommand implements CommandExecutor{
 								
 								if(targetBlock.getType().equals(Material.CHEST)||targetBlock.getType().equals(Material.TRAPPED_CHEST)){
 									
-									Chest chest = (Chest) targetBlock;
+									Chest chest = (Chest) targetBlock.getState();
 									Inventory inv = chest.getInventory();
 									
 									File file = new File(CR.c.getDataFolder(), File.separator + "chests" + File.separator + cName + ".yml");
@@ -78,11 +81,21 @@ public class CRCommand implements CommandExecutor{
 									
 									yaml.set("inv.amm", counter);
 									
+									Location loc = chest.getLocation();
+									yaml.set("coords.world", loc.getWorld().getName());
+									String sep = ":";
+									yaml.set("coords.coords", Math.round(loc.getX())+sep+Math.round(loc.getY())+sep+Math.round(loc.getZ())+sep);
+									
+									yaml.set("time", time);
+									long timeLong = System.currentTimeMillis() + (time * 1000);
+									yaml.set("time-long", timeLong);
+									
 									try{
 										yaml.save(file);
 									}catch(Exception e){e.printStackTrace();}
 									
 									p.sendMessage(CR.getPrefix() + "Success! Chest inventory saved to " + cName + ".yml");
+									p.sendMessage(CR.getPrefix() + "This chest will be restocked every " + time + " seconds.");
 									
 								}else{
 									p.sendMessage(CR.getPrefix() + ChatColor.DARK_RED + "Error! You must be looking at a chest or a trapped chest!");

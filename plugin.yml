@@ -1,5 +1,5 @@
 name: ChestRegeneration
-main: me.FluffyWolfers.CR
+main: me.FluffyWolfers.CR.CR
 version: 1.0
 commands:
   chestregen:
